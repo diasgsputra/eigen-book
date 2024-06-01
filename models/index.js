@@ -1,6 +1,8 @@
 const mysql = require('mysql2');
 const { Sequelize } = require('sequelize');
 const BookModel = require('./bookModel');
+const MemberModel = require('./memberModel');
+const BorrowModel = require('./borrowModel');
 
 const sequelize = new Sequelize({
     dialect: 'mysql',
@@ -12,6 +14,8 @@ const sequelize = new Sequelize({
 });
 
 const Books = BookModel(sequelize);
+const Members = MemberModel(sequelize);
+const Borrow = BorrowModel(sequelize);
 
 sequelize.authenticate()
     .then(() => {
@@ -31,5 +35,7 @@ sequelize.sync({ alter: true })  // Use sync to ensure the table is created
 
 module.exports = {
     sequelize,
-    Books
+    Books,
+    Members,
+    Borrow
 };
