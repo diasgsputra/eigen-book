@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { sequelize } = require('./models');
-// const { specs, swaggerUi } = require('./swagger');
+const { specs, swaggerUi } = require('./swagger');
 const app = express();
 const PORT = process.env.PORT || 9002;
 
@@ -17,7 +17,7 @@ app.use(booksRoutes);
 app.use(membersRoutes);
 app.use(borrowRoutes);
 // Swagger Documentation
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Start the server
 sequelize.sync().then(() => {

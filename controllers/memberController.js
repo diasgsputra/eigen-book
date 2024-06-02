@@ -19,7 +19,6 @@ const getAllMembers = async (req, res) => {
 
 const getCountBorrowedBooksByMember = async (req, res) => {
   const {code_member} = req.params;
-  console.log("code : "+code_member)
   try {
     const [result] = await sequelize.query(
       "SELECT COUNT(br.id) AS count "+
@@ -32,7 +31,6 @@ const getCountBorrowedBooksByMember = async (req, res) => {
       }
     );
     const count = result[0].count;
-    console.log("result count: " + count);
     
     return res.status(200).json({ data: count });
   } catch (error) {

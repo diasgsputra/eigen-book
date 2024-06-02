@@ -8,7 +8,7 @@ const addBorrowBook = async (req, res) => {
             "SELECT COUNT(br.id) AS count "+
             "FROM borrows br "+
             "INNER JOIN members m ON m.id = br.id_member "+
-            "WHERE m.id = :id AND m.is_penalty = 0",
+            "WHERE m.id = :id",
             {
               type: sequelize.QueryTypes.query,
               replacements: { id: id_member }
@@ -17,6 +17,20 @@ const addBorrowBook = async (req, res) => {
           const count = result[0].count;
           if(count > 1){
             return res.status(200).json({ message: "Member has borrow more than 1 book" });
+          }
+
+          const penalized = await sequelize.query(
+            "SELECT is_penalty "+
+            "FROM members "+
+            "WHERE id = :id",
+            {
+              type: sequelize.QueryTypes.query,
+              replacements: { id: id_member }
+            }
+          );
+          
+          if(penalized){
+            return res.status(200).json({ message: "Member is being penalized" });
           }
 
       let borrow;
