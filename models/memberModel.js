@@ -12,6 +12,9 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
+        },
+        is_penalty:{
+            type: DataTypes.BOOLEAN
         }
     });
 

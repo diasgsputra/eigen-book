@@ -18,6 +18,9 @@ module.exports = (sequelize) => {
         },
         stock: {
             type: DataTypes.INTEGER,
+        },
+        is_borrowed: {
+            type: DataTypes.BOOLEAN,
         }
     });
 
