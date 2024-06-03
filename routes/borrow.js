@@ -7,7 +7,7 @@
 
 const express = require("express");
 const router = express.Router();
-const { addBorrowBook } = require("../controllers/borrowController");
+const { addBorrowBook, returnBook } = require("../controllers/borrowController");
 
 /**
  * @swagger
@@ -34,5 +34,6 @@ const { addBorrowBook } = require("../controllers/borrowController");
  */
 const path = "/api/borrow"
 router.post(path + "/add", (req, res) => addBorrowBook(req, res));
+router.get(path + "/return/:id_borrow", (req, res) => returnBook(req, res));
 
 module.exports = router;
